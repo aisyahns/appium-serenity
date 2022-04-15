@@ -19,7 +19,7 @@ public class AndroidDriverInit {
         caps.setCapability("app", "C:\\Users\\admin\\Documents\\Aisyah\\learn\\serenity-appium\\sample-mobile-automation\\src\\test\\resources\\application\\com.yoesuv.androidroom-v2(2.1.0)-release.apk");
 
         try {
-            driver = new AndroidDriver<AndroidElement>(new URL("0.0.0.0:4723/wd/hub"), caps);
+            driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
         } catch (MalformedURLException e){
             e.printStackTrace();
         }

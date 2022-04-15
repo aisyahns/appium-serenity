@@ -1,5 +1,7 @@
 package com.example.steps;
 
+import com.example.app.pages.MyTaskPage;
+import io.cucumber.java.en.And;
 import net.thucydides.core.annotations.Steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +16,7 @@ public class MathsStepDefinitions {
     int b = 0;
     int total = 0;
 
+    MyTaskPage myTaskPage = new MyTaskPage();
     Calculator calculator = new Calculator();
 
     @Given("a is {int}")
@@ -36,4 +39,27 @@ public class MathsStepDefinitions {
         assertThat(total).isEqualTo(expectedTotal);
     }
 
+    @Given("I click add button")
+    public void iClickAddButton() throws Exception{
+        Thread.sleep(5000);
+        myTaskPage.clickButtonAdd();
+    }
+
+    @When("I input task title and task content")
+    public void iInputTaskTitleAndTaskContent() throws Exception{
+        Thread.sleep(5000);
+        myTaskPage.inputTaskTitle();
+        myTaskPage.inputTaskContent();
+    }
+
+    @And("I click save button")
+    public void iClickSaveButton() {
+        myTaskPage.clickButtonSave();
+    }
+
+    @Then("my task added successfully")
+    public void myTaskAddedSuccessfully() {
+        myTaskPage.verifyTaskTitleDisplayed();
+        myTaskPage.verifyTaskTitleEqual();
+    }
 }
