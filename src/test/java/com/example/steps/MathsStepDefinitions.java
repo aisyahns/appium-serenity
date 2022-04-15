@@ -41,13 +41,11 @@ public class MathsStepDefinitions {
 
     @Given("I click add button")
     public void iClickAddButton() throws Exception{
-        Thread.sleep(5000);
         myTaskPage.clickButtonAdd();
     }
 
     @When("I input task title and task content")
     public void iInputTaskTitleAndTaskContent() throws Exception{
-        Thread.sleep(5000);
         myTaskPage.inputTaskTitle();
         myTaskPage.inputTaskContent();
     }

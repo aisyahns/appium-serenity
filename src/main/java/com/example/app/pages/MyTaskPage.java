@@ -1,13 +1,18 @@
 package com.example.app.pages;
 
+import com.example.app.base.BasePageObject;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.example.app.drivers.AndroidDriverInit.driver;
 
-public class MyTaskPage {
+public class MyTaskPage extends BasePageObject {
 
     By buttonAdd(){
         return By.id("fabMain");
@@ -30,32 +35,31 @@ public class MyTaskPage {
     }
 
     public void clickButtonAdd(){
-        AndroidElement buttonAdd = driver.findElement(buttonAdd());
-        buttonAdd.click();
+        click(buttonAdd());
     }
 
     public void inputTaskTitle(){
-        AndroidElement fieldTaskTitle = driver.findElement(fieldTaskTitle());
-        fieldTaskTitle.sendKeys("belajar");
+        sendKeys(fieldTaskTitle(), "belajar");
     }
 
     public void inputTaskContent(){
-        AndroidElement fieldTaskContent = driver.findElement(fieldTaskContent());
-        fieldTaskContent.sendKeys("belajar yok");
+        sendKeys(fieldTaskContent(), "belajar yok");
     }
 
     public void clickButtonSave(){
-        AndroidElement buttonSave = driver.findElement(buttonSave());
-        buttonSave.click();
+        System.out.println(find(buttonSave()).getCenter());
+        System.out.println(find(buttonSave()).getCenter().getX() - 500);
+        System.out.println(driver.manage().window().getSize());
+        System.out.println(driver.manage().window().getSize().getHeight());
+        System.out.println(driver.manage().window().getSize().getWidth());
+        click(buttonSave());
     }
 
     public void verifyTaskTitleDisplayed(){
-        AndroidElement taskTitle = driver.findElement(taskTitle());
-        Assertions.assertTrue(taskTitle.isDisplayed());
+        Assertions.assertTrue(isDisplayed(taskTitle()));
     }
 
     public void verifyTaskTitleEqual(){
-        AndroidElement taskTitle = driver.findElement(taskTitle());
-        Assertions.assertEquals("belajar", taskTitle.getText());
+        Assertions.assertEquals("belajar", getText(taskTitle()));
     }
 }
