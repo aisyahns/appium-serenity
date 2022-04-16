@@ -40,14 +40,14 @@ public class MathsStepDefinitions {
     }
 
     @Given("I click add button")
-    public void iClickAddButton() throws Exception{
+    public void iClickAddButton() {
         myTaskPage.clickButtonAdd();
     }
 
     @When("I input task title and task content")
-    public void iInputTaskTitleAndTaskContent() throws Exception{
-        myTaskPage.inputTaskTitle();
-        myTaskPage.inputTaskContent();
+    public void iInputTaskTitleAndTaskContent() {
+        myTaskPage.inputTaskTitle("belajar");
+        myTaskPage.inputTaskContent("belajar yok");
     }
 
     @And("I click save button")
@@ -59,5 +59,32 @@ public class MathsStepDefinitions {
     public void myTaskAddedSuccessfully() {
         myTaskPage.verifyTaskTitleDisplayed();
         myTaskPage.verifyTaskTitleEqual();
+    }
+
+    @When("I input null title and null content")
+    public void iInputNullTitleAndNullContent() {
+        myTaskPage.inputTaskTitle("");
+        myTaskPage.inputTaskContent("");
+    }
+
+    @Then("I verify the error message")
+    public void iVerifyTheErrorMessage() {
+        myTaskPage.verifyErorrMessageDisplayed();
+    }
+
+    @When("I input task {string} and task {string}")
+    public void iInputTaskAndTask(String title, String content) {
+        myTaskPage.inputTaskTitle(title);
+        myTaskPage.inputTaskContent(content);
+    }
+
+    @Then("my task added {string}")
+    public void myTaskAdded(String result) {
+        if (result.equals("success")){
+            myTaskPage.verifyTaskTitleDisplayed();
+            myTaskPage.verifyTaskTitleEqual();
+        } else {
+            myTaskPage.verifyErorrMessageDisplayed();
+        }
     }
 }

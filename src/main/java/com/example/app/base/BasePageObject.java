@@ -65,4 +65,8 @@ public class BasePageObject {
                 .moveTo(PointOption.point((sizeDevice.getWidth()), (int) (sizeDevice.getHeight() * 0.2)))
                 .release().perform();
     }
+
+    public void scrollText(String text){
+
+    }
 }

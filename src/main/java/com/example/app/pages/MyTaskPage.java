@@ -1,21 +1,28 @@
 package com.example.app.pages;
 
 import com.example.app.base.BasePageObject;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
-
-import static com.example.app.drivers.AndroidDriverInit.driver;
 
 public class MyTaskPage extends BasePageObject {
 
+    By textResult(float number){
+        return By.xpath("......" + number +"");
+    }
+
+    //nyari suatu locator kita pakai xpath yang butuh parameter number / expected result
+    //assertion/verify equal -> getText element = number == number
+
+    public void verifyDisplayed(float number){
+        Assertions.assertTrue(isDisplayed(textResult(number)));
+    }
+
     By buttonAdd(){
         return By.id("fabMain");
+    }
+    
+    By errorMessage(){
+        return By.id("textinput_error");
     }
 
     By fieldTaskTitle(){
@@ -38,28 +45,27 @@ public class MyTaskPage extends BasePageObject {
         click(buttonAdd());
     }
 
-    public void inputTaskTitle(){
-        sendKeys(fieldTaskTitle(), "belajar");
+    public void inputTaskTitle(String input){
+        sendKeys(fieldTaskTitle(), input);
     }
 
-    public void inputTaskContent(){
-        sendKeys(fieldTaskContent(), "belajar yok");
+    public void inputTaskContent(String input){
+        sendKeys(fieldTaskContent(), input);
     }
 
     public void clickButtonSave(){
-        System.out.println(find(buttonSave()).getCenter());
-        System.out.println(find(buttonSave()).getCenter().getX() - 500);
-        System.out.println(driver.manage().window().getSize());
-        System.out.println(driver.manage().window().getSize().getHeight());
-        System.out.println(driver.manage().window().getSize().getWidth());
         click(buttonSave());
     }
 
     public void verifyTaskTitleDisplayed(){
-        Assertions.assertTrue(isDisplayed(taskTitle()));
+        Assertions.assertTrue(find(taskTitle()).isDisplayed());
     }
 
     public void verifyTaskTitleEqual(){
         Assertions.assertEquals("belajar", getText(taskTitle()));
+    }
+
+    public void verifyErorrMessageDisplayed() {
+        Assertions.assertTrue(isDisplayed(errorMessage()));
     }
 }
